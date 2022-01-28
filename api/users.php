@@ -14,10 +14,9 @@ $item = new Order($db);
 
 $data = json_decode(file_get_contents("php://input", true));
 
-// if(!empty($data->order_id) && !empty($data->cust_id) && !empty($data->order_placed) && !empty($data->material) && !empty($data->furnace_tempr) && !empty($data->application) && !empty($data->type) && !empty($data->sr_d) && 
-// !empty($data->spiral_pitch) && !empty($data->cr_d)&& !empty($data->crod_pitch) && !empty($data->edges) && !empty($data->belt_width) && !empty($data->length) && !empty($data->sample_photos))
-// {
-    $item->order_id = $data->order_id;
+if(!empty($data->cust_id) && !empty($data->order_placed) && !empty($data->material) && !empty($data->furnace_tempr) && !empty($data->application) && !empty($data->type) && !empty($data->sr_d) && 
+!empty($data->spiral_pitch) && !empty($data->cr_d)&& !empty($data->crod_pitch) && !empty($data->edges) && !empty($data->belt_width) && !empty($data->length) && !empty($data->sample_photos))
+{
     $item->cust_id = $data->cust_id;
     $item->order_placed = $data->order_placed;
     $item->material = $data->material;
@@ -36,7 +35,7 @@ $data = json_decode(file_get_contents("php://input", true));
     if($item->createOrders())
     {
         http_response_code(200);
-        echo json_encode(["message" => "Oders are created successfully!"]);
+        echo json_encode(["message" => "Orders are created successfully!"]);
     }
     else
     {
@@ -44,12 +43,11 @@ $data = json_decode(file_get_contents("php://input", true));
         echo json_encode(["message" => "Orders are failed to created"]);
     }
 
-// }
-// else
-// {
-//     http_response_code(400);
-//     echo json_encode(["message" => "Unable to create orders. Data is incomplete"]);
-// }
-
+}
+else
+{
+    http_response_code(400);
+    echo json_encode(["message" => "Unable to create orders. Data is incomplete"]);
+}
 
 ?>

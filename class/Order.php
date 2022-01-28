@@ -6,7 +6,6 @@ class Order
 
     private $db_table = "orders";
 
-    public $order_id;
     public $cust_id;
     public $order_placed;
     public $material;
@@ -30,9 +29,8 @@ class Order
     public function createOrders()
     {
           $sql = "INSERT INTO 
-                 orders (order_id,cust_id,order_placed,material,furnace_tempr,application,type,sr_d,spiral_pitch,cr_d,crod_pitch,edges,belt_width,length,sample_photos)
-                 VALUES (:order_id, 
-                   :cust_id, 
+                 orders (cust_id,order_placed,material,furnace_tempr,application,type,sr_d,spiral_pitch,cr_d,crod_pitch,edges,belt_width,length,sample_photos)
+                 VALUES (:cust_id, 
                     :order_placed, 
                     :material, 
                     :furnace_tempr,
@@ -47,12 +45,9 @@ class Order
                     :length, :sample_photos)";
 
         //$sql = "UPDATE orders SET material = :material WHERE order_id = :order_id";
-
-        //$sql= "INSERT INTO orders (order_id, material) VALUES (:order_id, :material)";
        
         $stmt = $this->conn->prepare($sql);
         
-        $this->order_id = htmlspecialchars(strip_tags($this->order_id));
         $this->cust_id = htmlspecialchars(strip_tags($this->cust_id));
         $this->order_placed = htmlspecialchars(strip_tags($this->order_placed));
         $this->material = htmlspecialchars(strip_tags($this->material));
@@ -68,7 +63,6 @@ class Order
         $this->length = htmlspecialchars(strip_tags($this->length));
         $this->sample_photos = htmlspecialchars(strip_tags($this->sample_photos));
 
-        $stmt->bindParam(":order_id", $this->order_id);
         $stmt->bindParam(":cust_id", $this->cust_id);
         $stmt->bindParam(":order_placed", $this->order_placed);
         $stmt->bindParam(":material", $this->material);
@@ -93,6 +87,5 @@ class Order
     }
 }
 
-
-
 ?>
+

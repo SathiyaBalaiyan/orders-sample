@@ -30,6 +30,4 @@ class Database
     //     return json_encode(['message' => $content, 'error' => $status]);
     // }
 }
-
 ?>
-
